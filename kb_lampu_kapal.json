@@ -1,0 +1,34 @@
+{
+  "judul": "Mengenali jenis kapal dari lampu navigasi di malam hari (COLREGs)",
+  "batas": "Aturan berasal dari teks resmi International Regulations for Preventing Collisions at Sea 1972 (72 COLREGS), Rule 18 dan Rule 23 sampai 27, sebagaimana dimuat U.S. Coast Guard dan NOAA. Hanya berlaku dari matahari terbenam sampai terbit, untuk kapal yang terlihat dari depan atau samping, dan Rule 18 hanya untuk kapal yang saling terlihat. Tidak mencakup kapal berlabuh atau kandas, kapal pandu, kapal terbatas sarat, kapal kecil kurang dari 12 meter yang memakai lampu putih bundar, dan kapal yang sedang ditarik (hanya lampu sisi dan buritan, jadi bisa tampak seperti kapal layar). Aturan perairan pedalaman tiap negara bisa berbeda. Hasilnya saran awal untuk belajar, bukan pengganti pengamatan langsung, radar, dan keputusan nakhoda.",
+  "sumber": {
+    "S1": "USCG Amalgamated Navigation Rules International & U.S. Inland (72 COLREGS), U.S. Coast Guard Navigation Center, https://navcen.uscg.gov/navigation-rules-amalgamated, diakses 9 Nov 2026",
+    "S2": "International & U.S. Inland Navigation Rules (Amalgamated Navigation Rules Handbook), NOAA Office of Coast Survey, https://navcen.uscg.gov/sites/default/files/pdf/navRules/Handbook/NOAANavigationRulesStandardSize.pdf, diakses 9 Nov 2026"
+  },
+  "pertanyaan": {
+    "lampu sisi merah atau hijau": "Apakah terlihat lampu sisi merah dan/atau hijau (dari depan atau samping kapal)?",
+    "lampu putih tiang": "Apakah terlihat lampu putih tiang (masthead), yaitu lampu putih yang lebih tinggi dari lampu sisi dan menyorot ke depan?",
+    "lampu kuning di atas lampu buritan": "Apakah ada lampu kuning tepat di atas lampu buritan putih?",
+    "dua lampu merah bersusun": "Apakah ada dua lampu bundar merah bersusun vertikal (tanpa lampu putih di antaranya)?",
+    "lampu hijau atau merah di atas lampu putih": "Apakah ada dua lampu bundar bersusun vertikal, atas hijau atau merah dan bawah putih?",
+    "lampu merah putih merah bersusun": "Apakah ada tiga lampu bundar bersusun vertikal: merah, putih, merah (dari atas ke bawah)?"
+  },
+  "kesimpulan": {
+    "kapal bermesin (underway)": "Kapal bermesin, termasuk kapal layar yang sedang memakai mesin. Untuk berpapasan, memotong, dan menyusul berlaku Rule 13 sampai 15.",
+    "kapal layar (underway)": "Kapal layar yang bergerak dengan layar, bukan dengan mesin. Kapal bermesin harus menghindarinya.",
+    "kapal tunda (menarik di belakang)": "Kapal bermesin yang menarik kapal di belakangnya. Dua lampu tiang bersusun berarti panjang tarikan 200 m atau kurang, tiga lampu berarti lebih dari 200 m.",
+    "kapal tidak dapat dikendalikan (NUC)": "Kapal yang karena keadaan luar biasa tidak dapat bermanuver sesuai aturan. Bila lampu sisi dan buritan juga terlihat, kapal itu masih bergerak maju di air.",
+    "kapal sedang menangkap ikan": "Kapal menangkap ikan dengan alat yang membatasi manuver. Hijau di atas putih berarti pukat tarik (trawl), merah di atas putih berarti penangkapan lain. Lampu sisi dan buritan menyala hanya bila kapal bergerak maju.",
+    "kapal terbatas kemampuan manuver (RAM)": "Kapal yang pekerjaannya membatasi manuver, misalnya memasang kabel bawah laut, mengeruk, atau memindahkan muatan saat berlayar.",
+    "beri jalan jika kapal Anda bermesin": "Kapal bermesin yang sedang underway wajib menjauh dari kapal ini (Rule 18(a)), kecuali Rule 9, 10, dan 13 menentukan lain."
+  },
+  "aturan": [
+    {"id": "R1", "jika": ["lampu sisi merah atau hijau", "lampu putih tiang"], "mode": "dan", "kecuali": ["lampu kuning di atas lampu buritan", "dua lampu merah bersusun", "lampu hijau atau merah di atas lampu putih", "lampu merah putih merah bersusun"], "maka": "kapal bermesin (underway)", "sumber": ["S1", "S2"]},
+    {"id": "R2", "jika": ["lampu sisi merah atau hijau"], "mode": "dan", "kecuali": ["lampu putih tiang", "dua lampu merah bersusun", "lampu hijau atau merah di atas lampu putih", "lampu merah putih merah bersusun"], "maka": "kapal layar (underway)", "sumber": ["S1", "S2"]},
+    {"id": "R3", "jika": ["lampu kuning di atas lampu buritan"], "mode": "dan", "maka": "kapal tunda (menarik di belakang)", "sumber": ["S1", "S2"]},
+    {"id": "R4", "jika": ["dua lampu merah bersusun"], "mode": "dan", "maka": "kapal tidak dapat dikendalikan (NUC)", "sumber": ["S1", "S2"]},
+    {"id": "R5", "jika": ["lampu hijau atau merah di atas lampu putih"], "mode": "dan", "maka": "kapal sedang menangkap ikan", "sumber": ["S1", "S2"]},
+    {"id": "R6", "jika": ["lampu merah putih merah bersusun"], "mode": "dan", "maka": "kapal terbatas kemampuan manuver (RAM)", "sumber": ["S1", "S2"]},
+    {"id": "R7", "jika": ["kapal layar (underway)", "kapal tidak dapat dikendalikan (NUC)", "kapal sedang menangkap ikan", "kapal terbatas kemampuan manuver (RAM)"], "mode": "atau", "maka": "beri jalan jika kapal Anda bermesin", "sumber": ["S1", "S2"]}
+  ]
+}
